@@ -6,7 +6,12 @@ export default function () {
   mongoose.connect(config.mongo.uri, config.mongo.options);
 
   // checks if connection with the database is successful
-  mongoose.connection.once('open', () => console.log('connected to the database'));
+  mongoose.connection.once('open', () => {
+    console.log('connected to the database');
+    if (process.env.NODE_ENV === 'development') {
+      require('./seedDB');
+    }
+  });
 
   mongoose.connection.on('error', (err) => {
     console.error(`MongoDB connection error: ${err}`);
