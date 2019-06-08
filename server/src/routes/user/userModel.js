@@ -2,7 +2,12 @@ import mongoose from 'mongoose';
 import passportLocalMongoose from 'passport-local-mongoose';
 import passport from 'passport';
 
-let UserSchema = new mongoose.Schema({});
+let UserSchema = new mongoose.Schema({
+  role: {
+    type: String,
+    default: 'patient'
+  }
+});
 
 UserSchema.plugin(passportLocalMongoose, {
   usernameField: 'email'

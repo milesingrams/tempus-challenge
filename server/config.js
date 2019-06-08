@@ -3,6 +3,7 @@ import path from 'path';
 // BASE CONFIG
 let baseConfig = {
   port: 3001, // Server port
+  // Would be a unique hash for a real app
   session: {
     name: 'session-name',
     secret: 'session-secret'
@@ -16,7 +17,7 @@ let envConfigs = {
 
     // MongoDB connection options
     mongo: {
-      uri: 'mongodb://localhost:27017/yaherd',
+      uri: 'mongodb+srv://testAtlasUser:testAtlasUserPassword@cluster0-ppgqd.mongodb.net/test?retryWrites=true&w=majority',
       options: {
         useNewUrlParser: true,
         useCreateIndex: true
@@ -28,9 +29,9 @@ let envConfigs = {
   production: {
     clientRootPath: path.resolve(__dirname, '../../client/dist'),
 
-    // MongoDB connection options
+    // MongoDB connection options... in a real app would be different for production
     mongo: {
-      uri: 'mongodb://localhost:27017/yaherd',
+      uri: 'mongodb+srv://testAtlasUser:testAtlasUserPassword@cluster0-ppgqd.mongodb.net/test?retryWrites=true&w=majority',
       options: {
         useNewUrlParser: true,
         useCreateIndex: true

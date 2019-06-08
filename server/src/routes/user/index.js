@@ -8,4 +8,7 @@ router.post('/signUp', userController.signUp);
 router.post('/signIn', passport.authenticate('local'), userController.signIn);
 router.get('/signOut');
 
+router.get('/', userController.getList);
+router.get('/:userId', userController.getById);
+
 export default router;
