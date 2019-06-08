@@ -2,7 +2,11 @@ import path from 'path';
 
 // BASE CONFIG
 let baseConfig = {
-  port: 3001 // Server port
+  port: 3001, // Server port
+  session: {
+    name: 'session-name',
+    secret: 'session-secret'
+  }
 }
 
 let envConfigs = {
@@ -13,7 +17,10 @@ let envConfigs = {
     // MongoDB connection options
     mongo: {
       uri: 'mongodb://localhost:27017/yaherd',
-      options: { useNewUrlParser: true }
+      options: {
+        useNewUrlParser: true,
+        useCreateIndex: true
+      }
     }
   },
 
@@ -24,7 +31,10 @@ let envConfigs = {
     // MongoDB connection options
     mongo: {
       uri: 'mongodb://localhost:27017/yaherd',
-      options: { useNewUrlParser: true }
+      options: {
+        useNewUrlParser: true,
+        useCreateIndex: true
+      }
     }
   }
 }
