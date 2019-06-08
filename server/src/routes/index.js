@@ -3,7 +3,7 @@ import userRoutes from './user';
 
 let router = new Router()
 
-router.use('/user', userRoutes);
+router.use('/users', userRoutes);
 
 router.get('*', (req, res, next) => {
   let err = new Error('Page Not Found');

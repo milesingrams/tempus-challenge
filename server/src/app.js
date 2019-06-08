@@ -28,7 +28,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api/v1', routes);
+app.use('/api', routes);
 
 // launch our server
 app.listen(config.port, () => console.log(`Listening on port: ${config.port}`));
