@@ -3,7 +3,8 @@
 Here is my take on the Tempus Coding challenge. While I didn't get a chance to fully complete the app, I did implement the majority of the requested features.
 
 ####  Implemented features:
-- Users can log in
+- Users can sign in
+- Users can sign out
 - User login uses hashing and salting
 - Sessions
 - System recognizes if user is doctor or patient
@@ -14,6 +15,7 @@ Here is my take on the Tempus Coding challenge. While I didn't get a chance to f
 - Users can change their info
 - System restricts viewing and updating user info on the server side
 - Any form of reasonable security
+- Redux state management
 
 ## App structure:
 
@@ -66,3 +68,5 @@ For the database I used mongoose because it is a powerful and fairly simple to u
 ## Fun stuff:
 
 The background map flies to the addresses of the users you click! In reality the geolocation isn't tied to the address but with a geocoding api it could very easily be implemented.
+
+Hope you like it!
