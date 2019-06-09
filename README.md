@@ -53,6 +53,17 @@ To run, navigate to the directory root and run: `npm start`
 
 No need to boot up a mongo database because the app uses Mongo Atlas in the cloud.
 
+Seeded Credentials:
+
+##### Patient:
+email: 'patient@test.com',
+password: 'patient'
+
+##### Doctor:
+email: 'doctor@test.com',
+password: 'doctor'
+
+
 ## Philosophy and what I would do differently:
 
 I decided to use [Create React App](https://github.com/facebook/create-react-app) to scaffold the client side. I chose this generator because it is simple, built by facebook, and has a lot of documentation.
