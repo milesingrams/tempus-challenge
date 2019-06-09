@@ -8,7 +8,7 @@ router.post('/signUp', userController.signUp);
 router.post('/signIn', passport.authenticate('local'), userController.signIn);
 router.get('/signOut');
 
-router.get('/', userController.getList);
+router.get('/patients', userController.getPatients);
 router.get('/me', userController.getMe);
 router.get('/:userId', userController.getById);
 

@@ -45,9 +45,9 @@ export async function getMe (req, res, next) {
   res.status(200).json({ user: req.user });
 }
 
-export async function getList (req, res, next) {
-  let users = await User.find({})
-  res.status(200).json({ users });
+export async function getPatients (req, res, next) {
+  let patients = await User.find({role: 'patient'})
+  res.status(200).json({ patients });
 }
 
 export async function getById (req, res, next) {

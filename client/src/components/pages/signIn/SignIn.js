@@ -57,6 +57,7 @@ export default function SignIn ({history}) {
         </Typography>
         <form className={classes.form}>
           <TextField
+            value={email}
             onChange={e => setEmail(e.target.value)}
             variant="outlined"
             margin="normal"
@@ -69,6 +70,7 @@ export default function SignIn ({history}) {
             autoFocus
           />
           <TextField
+            value={password}
             onChange={e => setPassword(e.target.value)}
             variant="outlined"
             margin="normal"

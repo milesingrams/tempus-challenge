@@ -4,24 +4,40 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import UserInfoCard from 'components/reusable/UserInfoCard';
 import Map from 'components/reusable/Map';
+import TextField from '@material-ui/core/TextField';
 import './Home.scss';
 
 let useStyles = makeStyles(theme => ({
   header: {
     color: 'white'
+  },
+  nameFilter: {
+    backgroundColor: 'white',
+    marginBottom: '1rem',
+    borderRadius: '4px'
   }
 }));
 
 export default function Home ({history}) {
   // initialize our state
-  let [patients, setPatients] = useState([]);
   let [user, setUser] = useState(null);
+  let [patients, setPatients] = useState([]);
+  let [patientsFilter, setPatientsFilter] = useState('');
   let mapRef = useRef();
 
   let classes = useStyles();
 
   let goToUserLocation = function (user) {
     mapRef.current.goToLocation(user.location)
+  }
+
+  let filteredPatients = function () {
+    let filterText = patientsFilter.toLowerCase();
+    let filtered = patients.filter((patient) => {
+      let patientName = patient.name.toLowerCase();
+      return patientName.indexOf(filterText) !== -1;
+    });
+    return filtered
   }
 
   useEffect(() => {
@@ -32,8 +48,8 @@ export default function Home ({history}) {
         setUser(user);
 
         if (user.role === 'doctor') {
-          let patientsResponse = await axios.get('api/users');
-          setPatients(patientsResponse.data.users);
+          let patientsResponse = await axios.get('api/users/patients');
+          setPatients(patientsResponse.data.patients);
         }
       } else {
         history.push('/signIn')
@@ -62,7 +78,16 @@ export default function Home ({history}) {
               <Typography className={classes.header} align="center" component="h1" variant="h5" gutterBottom>
                 Patients
               </Typography>
-              { patients.map((patient) =>
+                <TextField
+                  label="Name Search"
+                  className={classes.nameFilter}
+                  margin="normal"
+                  variant="filled"
+                  fullWidth
+                  value={patientsFilter}
+                  onChange={e => setPatientsFilter(e.target.value)}
+                />
+              { filteredPatients().map((patient) =>
                   (<div onClick={e => goToUserLocation(patient)} key={patient._id}>
                     <UserInfoCard user={patient}></UserInfoCard>
                   </div>)
