@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import UserInfoCard from 'components/reusable/UserInfoCard';
@@ -15,6 +16,11 @@ let useStyles = makeStyles(theme => ({
     backgroundColor: 'white',
     marginBottom: '1rem',
     borderRadius: '4px'
+  },
+  signOutButton: {
+    position: 'fixed',
+    top: '1rem',
+    right: '1rem'
   }
 }));
 
@@ -40,6 +46,13 @@ export default function Home ({history}) {
     return filtered
   }
 
+  let signOut = async function () {
+    let signOutResponse = await axios.get('api/users/signOut');
+    if (signOutResponse) {
+      history.push('/signIn');
+    }
+  }
+
   useEffect(() => {
     let fetchData = async () => {
       let userResponse = await axios.get('api/users/me');
@@ -60,6 +73,9 @@ export default function Home ({history}) {
 
   return (
     <div>
+      <Button variant="contained" size="medium" color="secondary" className={classes.signOutButton} onClick={signOut}>
+        Sign Out
+      </Button>
       <div className="home-page-content-wrap">
         <div className="home-page-content">
           {user ? (

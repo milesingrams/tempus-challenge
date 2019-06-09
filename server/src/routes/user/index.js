@@ -6,7 +6,7 @@ let router = new Router()
 
 router.post('/signUp', userController.signUp);
 router.post('/signIn', passport.authenticate('local'), userController.signIn);
-router.get('/signOut');
+router.get('/signOut', userController.signOut);
 
 router.get('/patients', userController.getPatients);
 router.get('/me', userController.getMe);
