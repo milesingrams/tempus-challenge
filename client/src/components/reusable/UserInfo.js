@@ -6,7 +6,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 export default function UserInfo (props) {
-  let { patients } = props;
+  let { user } = props;
 
   return (
     <React.Fragment>

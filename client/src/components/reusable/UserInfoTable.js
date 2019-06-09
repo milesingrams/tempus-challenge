@@ -10,7 +10,7 @@ export default function UserInfoTable (props) {
 
   return (
     <React.Fragment>
-      <Table size="small">
+      <Table size="small" className="user-info-table">
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
