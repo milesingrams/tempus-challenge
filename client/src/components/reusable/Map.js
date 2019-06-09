@@ -15,15 +15,15 @@ export default class Map extends Component {
     }
   };
 
-  _onViewportChange = viewport =>
+  onViewportChange = viewport =>
     this.setState({
       viewport: {...this.state.viewport, ...viewport}
     });
 
-  _goToViewport = ({longitude, latitude}) => {
-    this._onViewportChange({
-      longitude,
-      latitude,
+  goToLocation = (location) => {
+    this.onViewportChange({
+      latitude: location[0],
+      longitude: location[1],
       zoom: 11,
       transitionInterpolator: new FlyToInterpolator(),
       transitionDuration: 3000
@@ -40,7 +40,7 @@ export default class Map extends Component {
         width="100%"
         height="100%"
         mapStyle="mapbox://styles/mapbox/dark-v9"
-        onViewportChange={this._onViewportChange}
+        onViewportChange={this.onViewportChange}
         dragToRotate={false}
         mapboxApiAccessToken={MAPBOX_TOKEN}
       />

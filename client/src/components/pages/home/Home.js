@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,8 +16,13 @@ export default function Home ({history}) {
   // initialize our state
   let [patients, setPatients] = useState([]);
   let [user, setUser] = useState(null);
+  let mapRef = useRef();
 
   let classes = useStyles();
+
+  let goToUserLocation = function (user) {
+    mapRef.current.goToLocation(user.location)
+  }
 
   useEffect(() => {
     let fetchData = async () => {
@@ -46,31 +51,28 @@ export default function Home ({history}) {
               <Typography className={classes.header} align="center" component="h1" variant="h5" gutterBottom>
                 My Info
               </Typography>
-              <UserInfoCard user={user}></UserInfoCard>
+              <div onClick={e => goToUserLocation(user)}>
+                <UserInfoCard user={user}></UserInfoCard>
+              </div>
             </div>
           ) : null}
 
           {user && user.role === 'doctor' ? (
-            <div>
-              <div className="content-section">
-                <Typography className={classes.header} align="center" component="h1" variant="h5" gutterBottom>
-                  Patients
-                </Typography>
-                { patients.map((patient) =>
-                    (<UserInfoCard user={patient}></UserInfoCard>)
-                )}
-              </div>
-              <div className="content-section">
-                <Typography className={classes.header} align="center" component="h1" variant="h5" gutterBottom>
-                  Patient Info
-                </Typography>
-              </div>
+            <div className="content-section">
+              <Typography className={classes.header} align="center" component="h1" variant="h5" gutterBottom>
+                Patients
+              </Typography>
+              { patients.map((patient) =>
+                  (<div onClick={e => goToUserLocation(patient)} key={patient._id}>
+                    <UserInfoCard user={patient}></UserInfoCard>
+                  </div>)
+              )}
             </div>
           ) : null}
         </div>
       </div>
       <div className="background-map">
-        <Map></Map>
+        <Map ref={mapRef}></Map>
       </div>
     </div>
   );
