@@ -4,6 +4,7 @@
   "scripts": {
     "start:server": "npm --prefix server start",
     "start:client": "npm --prefix client start",
+    "install:all": "npm --prefix client install && npm --prefix server install",
     "start": "run-p start:*"
   },
   "dependencies": {
