@@ -1,45 +1,26 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Typography from '@material-ui/core/Typography';
+import UserInfoTable from './UserInfoTable';
 
-class Home extends Component {
+export default function Home () {
   // initialize our state
-  state = {
-    user: null,
-    patients: [],
-  };
+  let [patients, setPatients] = useState([]);
 
-  componentDidMount () {
-    this.getPatients();
-  }
+  useEffect(() => {
+    let fetchData = async () => {
+      let response = await axios.get('api/users');
+      setPatients(response.data.users);
+    };
+    fetchData();
+  }, []);
 
-  componentWillUnmount () {
-  }
-
-  async getPatients () {
-    let response = await axios.get('api/users');
-    this.setState({
-      patients: response.data.users
-    });
-    console.log(response.data.users);
-  };
-
-  render() {
-    const { patients } = this.state;
-    return (
-      <div>
-        <h1>Patients</h1>
-        <ul>
-          {
-            patients.map((patient) => (
-              <li key={patient.email}>
-                {patient.name}
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Typography component="h2" variant="h6" color="primary" gutterBottom>
+        Patients
+      </Typography>
+      <UserInfoTable users={patients}></UserInfoTable>
+    </div>
+  );
 }
-
-export default Home;
