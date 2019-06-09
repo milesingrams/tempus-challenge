@@ -35,6 +35,15 @@ export default function UserInfoCard ({ user }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
+  function nameToInitials (name) {
+    let nameSplit = name.trim().split(' ')
+    let initials = nameSplit[0].charAt(0)
+    if (nameSplit.length > 1) {
+      initials += nameSplit[nameSplit.length - 1].charAt(0)
+    }
+    return initials.toUpperCase()
+  }
+
   function handleExpandClick() {
     setExpanded(!expanded);
   }
@@ -44,7 +53,7 @@ export default function UserInfoCard ({ user }) {
       <CardHeader
         avatar={
           <Avatar className={classes.avatar}>
-            R
+            {nameToInitials(user.name)}
           </Avatar>
         }
         action={
