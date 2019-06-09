@@ -2,6 +2,25 @@
 
 Here is my take on the Tempus Coding challenge. While I didn't get a chance to fully complete the app, I did implement the majority of the requested features.
 
+### Building and Running the app:
+To build, navigate to the directory root and run: `npm run install:all`
+
+To run, navigate to the directory root and run: `npm start`
+
+No need to boot up a mongo database because the app uses Mongo Atlas in the cloud.
+
+Seeded Credentials:
+
+#### Patient:
+email: 'patient@test.com'
+password: 'patient'
+
+#### Doctor:
+email: 'doctor@test.com'
+password: 'doctor'
+
+
+## Features:
 ####  Implemented features:
 - Users can sign in
 - Users can sign out
@@ -45,24 +64,6 @@ The app directory is structured by separating frontend and backend into client a
 ```
 
 While this structure isn't ideal it does the trick for this example. In an actual app I would take the api keys and other sensitive info and move them to git-ignored .env files that are loaded based on the current environment state.
-
-## Building and Running the app:
-To build, navigate to the directory root and run: `npm run install:all`
-
-To run, navigate to the directory root and run: `npm start`
-
-No need to boot up a mongo database because the app uses Mongo Atlas in the cloud.
-
-Seeded Credentials:
-
-##### Patient:
-email: 'patient@test.com',
-password: 'patient'
-
-##### Doctor:
-email: 'doctor@test.com',
-password: 'doctor'
-
 
 ## Philosophy and what I would do differently:
 
