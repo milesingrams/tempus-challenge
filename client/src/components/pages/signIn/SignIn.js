@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
+let useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -28,8 +29,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn () {
-  const classes = useStyles();
+export default function SignIn ({history}) {
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('');
+
+  let classes = useStyles();
+
+  let signIn = async function () {
+    let signInResponse = await axios.post('api/users/signIn', {
+      email,
+      password
+    });
+    if (signInResponse.data.user) {
+      history.push('/');
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -41,8 +55,9 @@ export default function SignIn () {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form}>
           <TextField
+            onChange={e => setEmail(e.target.value)}
             variant="outlined"
             margin="normal"
             required
@@ -54,6 +69,7 @@ export default function SignIn () {
             autoFocus
           />
           <TextField
+            onChange={e => setPassword(e.target.value)}
             variant="outlined"
             margin="normal"
             required
@@ -65,7 +81,7 @@ export default function SignIn () {
             autoComplete="current-password"
           />
           <Button
-            type="submit"
+            onClick={signIn}
             fullWidth
             variant="contained"
             color="primary"

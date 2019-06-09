@@ -21,7 +21,7 @@ export async function signUp (req, res, next) {
 
 export async function signIn (req, res) {
   User.findOne({
-    username: req.body.username
+    email: req.body.email
   }, (err, user) => {
     res.status(200).json({ user });
   })
@@ -39,6 +39,10 @@ export async function signOut (req, res, next) {
     err.statusCode = 403;
     next(err);
   }
+}
+
+export async function getMe (req, res, next) {
+  res.status(200).json({ user: req.user });
 }
 
 export async function getList (req, res, next) {

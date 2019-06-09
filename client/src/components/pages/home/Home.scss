@@ -10,8 +10,6 @@
 
     .content-section {
       width: 100%;
-      padding: 1rem;
-      background-color: white;
 
       &:not(:last-child) {
         margin-bottom: 2rem;
@@ -21,6 +19,7 @@
 }
 
 .background-map {
+  opacity: .5;
   position: fixed;
   width: 100vw;
   height: 100vh;
