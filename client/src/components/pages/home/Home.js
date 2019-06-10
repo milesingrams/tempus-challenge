@@ -6,16 +6,28 @@ import { makeStyles } from '@material-ui/core/styles';
 import Zoom from '@material-ui/core/Zoom';
 import UserInfoCard from 'components/reusable/UserInfoCard';
 import Map from 'components/reusable/Map';
-import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import InputBase from '@material-ui/core/InputBase';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
 let useStyles = makeStyles(theme => ({
   header: {
     color: 'white'
   },
   nameFilter: {
-    backgroundColor: 'white',
+    padding: '.25rem',
+    paddingLeft: '.75rem',
+    display: 'flex',
     marginBottom: '1rem',
-    borderRadius: '4px'
+    alignItems: 'center',
+    '& .input': {
+      marginLeft: 8,
+      flex: 1
+    },
+    '& .iconButton': {
+      padding: 10
+    },
   },
   signOutButton: {
     position: 'fixed',
@@ -126,14 +138,19 @@ export default function Home ({history}) {
             <Typography className={classes.header} component="h1" variant="h5" gutterBottom>
               Patients
             </Typography>
-            <TextField
-              label="Name Search"
-              className={classes.nameFilter}
-              variant="filled"
-              fullWidth
-              value={patientsFilter}
-              onChange={e => setPatientsFilter(e.target.value)}
-            />
+
+            <Paper className={classes.nameFilter}>
+              <InputBase
+                className={classes.input}
+                placeholder="Name Search"
+                fullWidth
+                value={patientsFilter}
+                onChange={e => setPatientsFilter(e.target.value)}
+              />
+              <IconButton className={classes.iconButton}>
+                <SearchIcon />
+              </IconButton>
+            </Paper>
 
             {filteredPatients().map((patient, index) => (
             <Zoom in style={{transitionDelay: `${index * 50}ms`}} key={patient._id}>
