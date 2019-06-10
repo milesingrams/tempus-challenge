@@ -83,6 +83,21 @@ export default function UserInfoCard ({ user, expanded, editable }) {
     return initials.toUpperCase()
   };
 
+  let nameToColor = function (name) {
+    let hash = 3;
+    for (let i = 0; i < name.length; i += 1) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = '#';
+    for (let i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.substr(-2);
+    }
+
+    return color;
+  };
+
   useEffect(() => {
     setEditMode(false);
   }, [expanded]);
@@ -92,7 +107,7 @@ export default function UserInfoCard ({ user, expanded, editable }) {
       <CardHeader
         className={classes.header}
         avatar={
-          <Avatar className={classes.avatar}>
+          <Avatar className={classes.avatar} style={{backgroundColor: nameToColor(user.name)}}>
             {nameToInitials(user.name)}
           </Avatar>
         }

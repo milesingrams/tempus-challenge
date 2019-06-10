@@ -115,7 +115,7 @@ export default function Home ({history}) {
 
   return (
     <div>
-      <Button variant="contained" size="medium" color="secondary" className={classes.signOutButton} onClick={signOut}>
+      <Button variant="contained" size="medium" color="primary" className={classes.signOutButton} onClick={signOut}>
         Sign Out
       </Button>
       <div className={classes.homePageContentWrap}>
