@@ -31,9 +31,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function UserInfoCard ({ user }) {
+export default function UserInfoCard ({ user, expanded }) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
 
   function nameToInitials (name) {
     let nameSplit = name.trim().split(' ')
@@ -42,10 +41,6 @@ export default function UserInfoCard ({ user }) {
       initials += nameSplit[nameSplit.length - 1].charAt(0)
     }
     return initials.toUpperCase()
-  }
-
-  function handleExpandClick() {
-    setExpanded(!expanded);
   }
 
   return (
@@ -61,7 +56,6 @@ export default function UserInfoCard ({ user }) {
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,
             })}
-            onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="Show more"
           >
