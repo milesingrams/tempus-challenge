@@ -8,8 +8,6 @@ import UserInfoCard from 'components/reusable/UserInfoCard';
 import Map from 'components/reusable/Map';
 import TextField from '@material-ui/core/TextField';
 
-import './Home.scss';
-
 let useStyles = makeStyles(theme => ({
   header: {
     color: 'white'
@@ -23,6 +21,31 @@ let useStyles = makeStyles(theme => ({
     position: 'fixed',
     top: '1rem',
     right: '1rem'
+  },
+  homePageContentWrap: {
+    minHeight: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  homePageContent: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  contentSection: {
+    width: '100%',
+    ':not(:last-child)': {
+      marginBottom: '2rem'
+    }
+  },
+  backgroundMap: {
+    opacity: .8,
+    position: 'fixed',
+    width: '100vw',
+    height: '100vh',
+    left: 0,
+    top: 0,
+    zIndex: -1
   }
 }));
 
@@ -38,7 +61,11 @@ export default function Home ({history}) {
 
   let onUserClick = function (user) {
     mapRef.current.goToLocation(user.location);
-    setExpandedUser(user);
+    if (expandedUser !== user) {
+      setExpandedUser(user);
+    } else {
+      setExpandedUser('');
+    }
   };
 
   let filteredPatients = function () {
@@ -81,10 +108,10 @@ export default function Home ({history}) {
       <Button variant="contained" size="medium" color="secondary" className={classes.signOutButton} onClick={signOut}>
         Sign Out
       </Button>
-      <div className="home-page-content-wrap">
-        <div className="home-page-content">
+      <div className={classes.homePageContentWrap}>
+        <div className={classes.homePageContent}>
           {user ? (
-          <div className="content-section">
+          <div className={classes.contentSection}>
             <Typography className={classes.header} align="center" component="h1" variant="h5" gutterBottom>
               My Info
             </Typography>
@@ -97,7 +124,7 @@ export default function Home ({history}) {
           ) : null}
 
           {user && user.role === 'doctor' ? (
-          <div className="content-section">
+          <div className={classes.contentSection}>
             <Typography className={classes.header} align="center" component="h1" variant="h5" gutterBottom>
               Patients
             </Typography>
@@ -123,7 +150,7 @@ export default function Home ({history}) {
           ) : null}
         </div>
       </div>
-      <div className="background-map">
+      <div className={classes.backgroundMap}>
         <Map ref={mapRef}></Map>
       </div>
     </div>
