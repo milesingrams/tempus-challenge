@@ -34,9 +34,7 @@ let useStyles = makeStyles(theme => ({
   },
   contentSection: {
     width: '100%',
-    ':not(:last-child)': {
-      marginBottom: '4rem'
-    }
+    marginBottom: '1rem'
   },
   backgroundMap: {
     opacity: .8,
@@ -112,12 +110,12 @@ export default function Home ({history}) {
         <div className={classes.homePageContent}>
           {user ? (
           <div className={classes.contentSection}>
-            <Typography className={classes.header} align="center" component="h1" variant="h5" gutterBottom>
+            <Typography className={classes.header} component="h1" variant="h5" gutterBottom>
               My Info
             </Typography>
             <Zoom in>
               <div onClick={e => onUserClick(user)}>
-                <UserInfoCard user={user} expanded={expandedUser === user}></UserInfoCard>
+                <UserInfoCard user={user} expanded={expandedUser === user} editable></UserInfoCard>
               </div>
             </Zoom>
           </div>
@@ -125,7 +123,7 @@ export default function Home ({history}) {
 
           {user && user.role === 'doctor' ? (
           <div className={classes.contentSection}>
-            <Typography className={classes.header} align="center" component="h1" variant="h5" gutterBottom>
+            <Typography className={classes.header} component="h1" variant="h5" gutterBottom>
               Patients
             </Typography>
             <TextField
