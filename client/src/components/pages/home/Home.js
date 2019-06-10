@@ -101,6 +101,7 @@ export default function Home ({history}) {
 
       if (user) {
         setUser(user);
+        mapRef.current.goToLocation(user.location);
         if (user.role === 'doctor') {
           let patientsResponse = await axios.get('api/users/patients');
           setPatients(patientsResponse.data.patients);
