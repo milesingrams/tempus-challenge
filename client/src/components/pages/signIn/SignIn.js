@@ -20,7 +20,7 @@ let useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
-  form: {
+  inputsWrap: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
@@ -55,7 +55,7 @@ export default function SignIn ({history}) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form}>
+        <div className={classes.inputsWrap}>
           <TextField
             value={email}
             onChange={e => setEmail(e.target.value)}
@@ -91,7 +91,7 @@ export default function SignIn ({history}) {
           >
             Sign In
           </Button>
-        </form>
+        </div>
       </div>
     </Container>
   );

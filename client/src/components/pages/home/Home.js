@@ -35,7 +35,7 @@ let useStyles = makeStyles(theme => ({
   contentSection: {
     width: '100%',
     ':not(:last-child)': {
-      marginBottom: '2rem'
+      marginBottom: '4rem'
     }
   },
   backgroundMap: {
@@ -131,7 +131,6 @@ export default function Home ({history}) {
             <TextField
               label="Name Search"
               className={classes.nameFilter}
-              margin="normal"
               variant="filled"
               fullWidth
               value={patientsFilter}
@@ -139,8 +138,8 @@ export default function Home ({history}) {
             />
 
             {filteredPatients().map((patient, index) => (
-            <Zoom in style={{transitionDelay: `${index * 50}ms`}}>
-              <div onClick={e => onUserClick(patient)} key={patient._id}>
+            <Zoom in style={{transitionDelay: `${index * 50}ms`}} key={patient._id}>
+              <div onClick={e => onUserClick(patient)}>
                 <UserInfoCard user={patient} expanded={expandedUser === patient}></UserInfoCard>
               </div>
             </Zoom>)
