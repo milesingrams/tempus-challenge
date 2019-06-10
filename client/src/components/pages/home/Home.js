@@ -41,6 +41,7 @@ let useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   homePageContent: {
+    padding: '2rem 0',
     display: 'flex',
     flexDirection: 'column'
   },
