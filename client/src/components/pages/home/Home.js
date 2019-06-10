@@ -112,6 +112,7 @@ export default function Home ({history}) {
     };
 
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   return (
